@@ -1,0 +1,42 @@
+﻿@model FYPTLY.Models.Survey_has_Questions
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Survey_has_Questions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.answer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.question_text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.question_text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Survey.survey_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Survey.survey_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

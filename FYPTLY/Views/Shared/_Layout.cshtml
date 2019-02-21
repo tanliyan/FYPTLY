@@ -1,0 +1,57 @@
+﻿<!DO<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Welcone to Parkway Pantai</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Parkway Pantai", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+
+                    <li> @Html.ActionLink("Maintain Patients", "Index", "Patient")</li>
+
+                    <li>@Html.ActionLink("Register", "Index", "Patient/Create")</li>
+
+
+
+                    <li> @Html.ActionLink("Survey", "Index", "Survey")</li>
+                    <li> @Html.ActionLink("Survey Has Questions", "Index", "Survey_has_Questions")</li>
+                    <li> @Html.ActionLink("Question", "Index", "Questions")</li>
+                    <li> @Html.ActionLink("Question Category", "Index", "QuestionCategory")</li>
+                    
+
+                </ul>
+                </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

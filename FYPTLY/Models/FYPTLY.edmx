@@ -1,0 +1,1236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FYPTLYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="appointment_id" />
+          </Key>
+          <Property Name="appointment_id" Type="int" Nullable="false" />
+          <Property Name="appointment_date" Type="date" Nullable="false" />
+          <Property Name="Appointment_time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="appointment_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Venue_id" Type="int" Nullable="false" />
+          <Property Name="Patient_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="Appuser_Id" />
+          </Key>
+          <Property Name="Appuser_Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NRIC" Type="varchar" MaxLength="9" />
+          <Property Name="Mobile_Number" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Last_Login" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bundle">
+          <Key>
+            <PropertyRef Name="bundle_id" />
+          </Key>
+          <Property Name="bundle_id" Type="int" Nullable="false" />
+          <Property Name="bundle_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="corporate_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Corporate">
+          <Key>
+            <PropertyRef Name="corporate_id" />
+          </Key>
+          <Property Name="corporate_id" Type="int" Nullable="false" />
+          <Property Name="corporate_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="corporate_details" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Corporate_has_Patient">
+          <Key>
+            <PropertyRef Name="corporate_id" />
+            <PropertyRef Name="patient_id" />
+          </Key>
+          <Property Name="corporate_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="int" Nullable="false" />
+          <Property Name="event_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="corporate_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HR_Contact_List">
+          <Key>
+            <PropertyRef Name="hr_id" />
+          </Key>
+          <Property Name="hr_id" Type="int" Nullable="false" />
+          <Property Name="hr_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="hr_contact" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="hr_email" Type="varchar" MaxLength="45" />
+          <Property Name="corporate_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lab_results">
+          <Key>
+            <PropertyRef Name="results_id" />
+          </Key>
+          <Property Name="results_id" Type="int" Nullable="false" />
+          <Property Name="results_observation" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medical_Test">
+          <Key>
+            <PropertyRef Name="Medical_Test_id" />
+          </Key>
+          <Property Name="Medical_Test_id" Type="int" Nullable="false" />
+          <Property Name="test_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="test_description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Staff_id" Type="int" Nullable="false" />
+          <Property Name="appointment_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medical_Test_has_Lab_results">
+          <Key>
+            <PropertyRef Name="Medical_Test_id" />
+            <PropertyRef Name="results_id" />
+          </Key>
+          <Property Name="Medical_Test_id" Type="int" Nullable="false" />
+          <Property Name="results_id" Type="int" Nullable="false" />
+          <Property Name="result_description" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_id" />
+          </Key>
+          <Property Name="Patient_id" Type="int" Nullable="false" />
+          <Property Name="Nric" Type="varchar" MaxLength="45" />
+          <Property Name="p_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="p_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="p_gender" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="p_dob" Type="date" Nullable="false" />
+          <Property Name="p_email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="postal_code" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question_Category">
+          <Key>
+            <PropertyRef Name="Question_Category_id" />
+          </Key>
+          <Property Name="Question_Category_id" Type="int" Nullable="false" />
+          <Property Name="question_category_name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="questions_id" />
+          </Key>
+          <Property Name="questions_id" Type="int" Nullable="false" />
+          <Property Name="question_text" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mcq" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="question_option" Type="char" MaxLength="1" />
+          <Property Name="Question_Category_id" Type="int" Nullable="false" />
+          <Property Name="Medical_Test_Medical_Test_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="int" Nullable="false" />
+          <Property Name="staff_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="staff_department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="staff_roles" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="staff_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="staff_user" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="staff_pass" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff_has_Patient">
+          <Key>
+            <PropertyRef Name="Staff_id" />
+            <PropertyRef Name="Patient_id" />
+          </Key>
+          <Property Name="Staff_id" Type="int" Nullable="false" />
+          <Property Name="Patient_id" Type="int" Nullable="false" />
+          <Property Name="First_consultation_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="survey_id" />
+          </Key>
+          <Property Name="survey_id" Type="int" Nullable="false" />
+          <Property Name="survey_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_conducted" Type="date" Nullable="false" />
+          <Property Name="Medical_Test_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Survey_has_Questions">
+          <Key>
+            <PropertyRef Name="questions_id" />
+            <PropertyRef Name="Survey_id" />
+          </Key>
+          <Property Name="questions_id" Type="int" Nullable="false" />
+          <Property Name="Survey_id" Type="int" Nullable="false" />
+          <Property Name="answer" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="Venue_id" />
+          </Key>
+          <Property Name="Venue_id" Type="int" Nullable="false" />
+          <Property Name="Venue_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Venue_address" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Appointment_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Appointment_Venue1">
+          <End Role="Venue" Type="Self.Venue" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="Venue_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Venue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Bundle_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Bundle" Type="Self.Bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Bundle">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Corporate_has_Patient_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Corporate_has_Patient" Type="Self.Corporate_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Corporate_has_Patient">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Corporate_has_Patient_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Corporate_has_Patient" Type="Self.Corporate_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Corporate_has_Patient">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Event_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_HR_Contact_List_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="HR_Contact_List" Type="Self.HR_Contact_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="HR_Contact_List">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_Appointment1">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="appointment_id" />
+            </Principal>
+            <Dependent Role="Medical_Test">
+              <PropertyRef Name="appointment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_has_Lab_results_Lab_results1">
+          <End Role="Lab_results" Type="Self.Lab_results" Multiplicity="1" />
+          <End Role="Medical_Test_has_Lab_results" Type="Self.Medical_Test_has_Lab_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lab_results">
+              <PropertyRef Name="results_id" />
+            </Principal>
+            <Dependent Role="Medical_Test_has_Lab_results">
+              <PropertyRef Name="results_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_has_Lab_results_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Medical_Test_has_Lab_results" Type="Self.Medical_Test_has_Lab_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Medical_Test_has_Lab_results">
+              <PropertyRef Name="Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="Medical_Test">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_has_Survey_Questions1">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Survey_has_Questions" Type="Self.Survey_has_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="questions_id" />
+            </Principal>
+            <Dependent Role="Survey_has_Questions">
+              <PropertyRef Name="questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_has_Survey_Survey1">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Survey_has_Questions" Type="Self.Survey_has_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="survey_id" />
+            </Principal>
+            <Dependent Role="Survey_has_Questions">
+              <PropertyRef Name="Survey_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Medical_Test_Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_Question_Category1">
+          <End Role="Question_Category" Type="Self.Question_Category" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question_Category">
+              <PropertyRef Name="Question_Category_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Question_Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Staff_has_Patient_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Staff_has_Patient" Type="Self.Staff_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Staff_has_Patient">
+              <PropertyRef Name="Patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Staff_has_Patient_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff_has_Patient" Type="Self.Staff_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="Staff_has_Patient">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Survey_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Survey" Type="Self.Survey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Survey">
+              <PropertyRef Name="Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYPTLYModelStoreContainer">
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bundle" EntityType="Self.Bundle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Corporate" EntityType="Self.Corporate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Corporate_has_Patient" EntityType="Self.Corporate_has_Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Contact_List" EntityType="Self.HR_Contact_List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lab_results" EntityType="Self.Lab_results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medical_Test" EntityType="Self.Medical_Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medical_Test_has_Lab_results" EntityType="Self.Medical_Test_has_Lab_results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question_Category" EntityType="Self.Question_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff_has_Patient" EntityType="Self.Staff_has_Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Survey" EntityType="Self.Survey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Survey_has_Questions" EntityType="Self.Survey_has_Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venue" EntityType="Self.Venue" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Appointment_Patient1" Association="Self.fk_Appointment_Patient1">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Appointment_Venue1" Association="Self.fk_Appointment_Venue1">
+            <End Role="Venue" EntitySet="Venue" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Bundle_Corporate1" Association="Self.fk_Bundle_Corporate1">
+            <End Role="Corporate" EntitySet="Corporate" />
+            <End Role="Bundle" EntitySet="Bundle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Corporate_has_Patient_Corporate1" Association="Self.fk_Corporate_has_Patient_Corporate1">
+            <End Role="Corporate" EntitySet="Corporate" />
+            <End Role="Corporate_has_Patient" EntitySet="Corporate_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Corporate_has_Patient_Patient1" Association="Self.fk_Corporate_has_Patient_Patient1">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Corporate_has_Patient" EntitySet="Corporate_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Event_Corporate1" Association="Self.fk_Event_Corporate1">
+            <End Role="Corporate" EntitySet="Corporate" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="fk_HR_Contact_List_Corporate1" Association="Self.fk_HR_Contact_List_Corporate1">
+            <End Role="Corporate" EntitySet="Corporate" />
+            <End Role="HR_Contact_List" EntitySet="HR_Contact_List" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_Appointment1" Association="Self.fk_Medical_Test_Appointment1">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_has_Lab_results_Lab_results1" Association="Self.fk_Medical_Test_has_Lab_results_Lab_results1">
+            <End Role="Lab_results" EntitySet="Lab_results" />
+            <End Role="Medical_Test_has_Lab_results" EntitySet="Medical_Test_has_Lab_results" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_has_Lab_results_Medical_Test1" Association="Self.fk_Medical_Test_has_Lab_results_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Medical_Test_has_Lab_results" EntitySet="Medical_Test_has_Lab_results" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_Staff1" Association="Self.fk_Medical_Test_Staff1">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_has_Survey_Questions1" Association="Self.fk_Questions_has_Survey_Questions1">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Survey_has_Questions" EntitySet="Survey_has_Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_has_Survey_Survey1" Association="Self.fk_Questions_has_Survey_Survey1">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="Survey_has_Questions" EntitySet="Survey_has_Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_Medical_Test1" Association="Self.fk_Questions_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_Question_Category1" Association="Self.fk_Questions_Question_Category1">
+            <End Role="Question_Category" EntitySet="Question_Category" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Staff_has_Patient_Patient1" Association="Self.fk_Staff_has_Patient_Patient1">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Staff_has_Patient" EntitySet="Staff_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Staff_has_Patient_Staff1" Association="Self.fk_Staff_has_Patient_Staff1">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Staff_has_Patient" EntitySet="Staff_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Survey_Medical_Test1" Association="Self.fk_Survey_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Survey" EntitySet="Survey" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FYPTLYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="appointment_id" />
+          </Key>
+          <Property Name="appointment_id" Type="Int32" Nullable="false" />
+          <Property Name="appointment_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Appointment_time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="appointment_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Venue_id" Type="Int32" Nullable="false" />
+          <Property Name="Patient_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.fk_Appointment_Patient1" FromRole="Appointment" ToRole="Patient" />
+          <NavigationProperty Name="Venue" Relationship="Self.fk_Appointment_Venue1" FromRole="Appointment" ToRole="Venue" />
+          <NavigationProperty Name="Medical_Test" Relationship="Self.fk_Medical_Test_Appointment1" FromRole="Appointment" ToRole="Medical_Test" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="Appuser_Id" />
+          </Key>
+          <Property Name="Appuser_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NRIC" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile_Number" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Login" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Bundle">
+          <Key>
+            <PropertyRef Name="bundle_id" />
+          </Key>
+          <Property Name="bundle_id" Type="Int32" Nullable="false" />
+          <Property Name="bundle_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="corporate_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Corporate" Relationship="Self.fk_Bundle_Corporate1" FromRole="Bundle" ToRole="Corporate" />
+        </EntityType>
+        <EntityType Name="Corporate">
+          <Key>
+            <PropertyRef Name="corporate_id" />
+          </Key>
+          <Property Name="corporate_id" Type="Int32" Nullable="false" />
+          <Property Name="corporate_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="corporate_details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bundles" Relationship="Self.fk_Bundle_Corporate1" FromRole="Corporate" ToRole="Bundle" />
+          <NavigationProperty Name="Corporate_has_Patient" Relationship="Self.fk_Corporate_has_Patient_Corporate1" FromRole="Corporate" ToRole="Corporate_has_Patient" />
+          <NavigationProperty Name="Events" Relationship="Self.fk_Event_Corporate1" FromRole="Corporate" ToRole="Event" />
+          <NavigationProperty Name="HR_Contact_List" Relationship="Self.fk_HR_Contact_List_Corporate1" FromRole="Corporate" ToRole="HR_Contact_List" />
+        </EntityType>
+        <EntityType Name="Corporate_has_Patient">
+          <Key>
+            <PropertyRef Name="corporate_id" />
+            <PropertyRef Name="patient_id" />
+          </Key>
+          <Property Name="corporate_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Corporate" Relationship="Self.fk_Corporate_has_Patient_Corporate1" FromRole="Corporate_has_Patient" ToRole="Corporate" />
+          <NavigationProperty Name="Patient" Relationship="Self.fk_Corporate_has_Patient_Patient1" FromRole="Corporate_has_Patient" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="event_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="corporate_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Corporate" Relationship="Self.fk_Event_Corporate1" FromRole="Event" ToRole="Corporate" />
+        </EntityType>
+        <EntityType Name="HR_Contact_List">
+          <Key>
+            <PropertyRef Name="hr_id" />
+          </Key>
+          <Property Name="hr_id" Type="Int32" Nullable="false" />
+          <Property Name="hr_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hr_contact" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hr_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="corporate_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Corporate" Relationship="Self.fk_HR_Contact_List_Corporate1" FromRole="HR_Contact_List" ToRole="Corporate" />
+        </EntityType>
+        <EntityType Name="Lab_results">
+          <Key>
+            <PropertyRef Name="results_id" />
+          </Key>
+          <Property Name="results_id" Type="Int32" Nullable="false" />
+          <Property Name="results_observation" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Medical_Test_has_Lab_results" Relationship="Self.fk_Medical_Test_has_Lab_results_Lab_results1" FromRole="Lab_results" ToRole="Medical_Test_has_Lab_results" />
+        </EntityType>
+        <EntityType Name="Medical_Test">
+          <Key>
+            <PropertyRef Name="Medical_Test_id" />
+          </Key>
+          <Property Name="Medical_Test_id" Type="Int32" Nullable="false" />
+          <Property Name="test_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="test_description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Staff_id" Type="Int32" Nullable="false" />
+          <Property Name="appointment_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointment" Relationship="Self.fk_Medical_Test_Appointment1" FromRole="Medical_Test" ToRole="Appointment" />
+          <NavigationProperty Name="Medical_Test_has_Lab_results" Relationship="Self.fk_Medical_Test_has_Lab_results_Medical_Test1" FromRole="Medical_Test" ToRole="Medical_Test_has_Lab_results" />
+          <NavigationProperty Name="Staff" Relationship="Self.fk_Medical_Test_Staff1" FromRole="Medical_Test" ToRole="Staff" />
+          <NavigationProperty Name="Questions" Relationship="Self.fk_Questions_Medical_Test1" FromRole="Medical_Test" ToRole="Questions" />
+          <NavigationProperty Name="Surveys" Relationship="Self.fk_Survey_Medical_Test1" FromRole="Medical_Test" ToRole="Survey" />
+        </EntityType>
+        <EntityType Name="Medical_Test_has_Lab_results">
+          <Key>
+            <PropertyRef Name="Medical_Test_id" />
+            <PropertyRef Name="results_id" />
+          </Key>
+          <Property Name="Medical_Test_id" Type="Int32" Nullable="false" />
+          <Property Name="results_id" Type="Int32" Nullable="false" />
+          <Property Name="result_description" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lab_results" Relationship="Self.fk_Medical_Test_has_Lab_results_Lab_results1" FromRole="Medical_Test_has_Lab_results" ToRole="Lab_results" />
+          <NavigationProperty Name="Medical_Test" Relationship="Self.fk_Medical_Test_has_Lab_results_Medical_Test1" FromRole="Medical_Test_has_Lab_results" ToRole="Medical_Test" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_id" />
+          </Key>
+          <Property Name="Patient_id" Type="Int32" Nullable="false" />
+          <Property Name="Nric" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="p_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="p_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="p_gender" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="p_dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="p_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="postal_code" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="Self.fk_Appointment_Patient1" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="Corporate_has_Patient" Relationship="Self.fk_Corporate_has_Patient_Patient1" FromRole="Patient" ToRole="Corporate_has_Patient" />
+          <NavigationProperty Name="Staff_has_Patient" Relationship="Self.fk_Staff_has_Patient_Patient1" FromRole="Patient" ToRole="Staff_has_Patient" />
+        </EntityType>
+        <EntityType Name="Question_Category">
+          <Key>
+            <PropertyRef Name="Question_Category_id" />
+          </Key>
+          <Property Name="Question_Category_id" Type="Int32" Nullable="false" />
+          <Property Name="question_category_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.fk_Questions_Question_Category1" FromRole="Question_Category" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="questions_id" />
+          </Key>
+          <Property Name="questions_id" Type="Int32" Nullable="false" />
+          <Property Name="question_text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mcq" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="question_option" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Question_Category_id" Type="Int32" Nullable="false" />
+          <Property Name="Medical_Test_Medical_Test_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medical_Test" Relationship="Self.fk_Questions_Medical_Test1" FromRole="Questions" ToRole="Medical_Test" />
+          <NavigationProperty Name="Question_Category" Relationship="Self.fk_Questions_Question_Category1" FromRole="Questions" ToRole="Question_Category" />
+          <NavigationProperty Name="Survey_has_Questions" Relationship="Self.fk_Questions_has_Survey_Questions1" FromRole="Questions" ToRole="Survey_has_Questions" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="Int32" Nullable="false" />
+          <Property Name="staff_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staff_department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staff_roles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staff_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="staff_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staff_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Medical_Test" Relationship="Self.fk_Medical_Test_Staff1" FromRole="Staff" ToRole="Medical_Test" />
+          <NavigationProperty Name="Staff_has_Patient" Relationship="Self.fk_Staff_has_Patient_Staff1" FromRole="Staff" ToRole="Staff_has_Patient" />
+        </EntityType>
+        <EntityType Name="Staff_has_Patient">
+          <Key>
+            <PropertyRef Name="Staff_id" />
+            <PropertyRef Name="Patient_id" />
+          </Key>
+          <Property Name="Staff_id" Type="Int32" Nullable="false" />
+          <Property Name="Patient_id" Type="Int32" Nullable="false" />
+          <Property Name="First_consultation_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Patient" Relationship="Self.fk_Staff_has_Patient_Patient1" FromRole="Staff_has_Patient" ToRole="Patient" />
+          <NavigationProperty Name="Staff" Relationship="Self.fk_Staff_has_Patient_Staff1" FromRole="Staff_has_Patient" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="survey_id" />
+          </Key>
+          <Property Name="survey_id" Type="Int32" Nullable="false" />
+          <Property Name="survey_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_conducted" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Medical_Test_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medical_Test" Relationship="Self.fk_Survey_Medical_Test1" FromRole="Survey" ToRole="Medical_Test" />
+          <NavigationProperty Name="Survey_has_Questions" Relationship="Self.fk_Questions_has_Survey_Survey1" FromRole="Survey" ToRole="Survey_has_Questions" />
+        </EntityType>
+        <EntityType Name="Survey_has_Questions">
+          <Key>
+            <PropertyRef Name="questions_id" />
+            <PropertyRef Name="Survey_id" />
+          </Key>
+          <Property Name="questions_id" Type="Int32" Nullable="false" />
+          <Property Name="Survey_id" Type="Int32" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Question" Relationship="Self.fk_Questions_has_Survey_Questions1" FromRole="Survey_has_Questions" ToRole="Questions" />
+          <NavigationProperty Name="Survey" Relationship="Self.fk_Questions_has_Survey_Survey1" FromRole="Survey_has_Questions" ToRole="Survey" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="Venue_id" />
+          </Key>
+          <Property Name="Venue_id" Type="Int32" Nullable="false" />
+          <Property Name="Venue_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Venue_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="Self.fk_Appointment_Venue1" FromRole="Venue" ToRole="Appointment" />
+        </EntityType>
+        <Association Name="fk_Appointment_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Appointment_Venue1">
+          <End Role="Venue" Type="Self.Venue" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="Venue_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="Venue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_Appointment1">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="appointment_id" />
+            </Principal>
+            <Dependent Role="Medical_Test">
+              <PropertyRef Name="appointment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Bundle_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Bundle" Type="Self.Bundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Bundle">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Corporate_has_Patient_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Corporate_has_Patient" Type="Self.Corporate_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Corporate_has_Patient">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Event_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_HR_Contact_List_Corporate1">
+          <End Role="Corporate" Type="Self.Corporate" Multiplicity="1" />
+          <End Role="HR_Contact_List" Type="Self.HR_Contact_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corporate">
+              <PropertyRef Name="corporate_id" />
+            </Principal>
+            <Dependent Role="HR_Contact_List">
+              <PropertyRef Name="corporate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Corporate_has_Patient_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Corporate_has_Patient" Type="Self.Corporate_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Corporate_has_Patient">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_has_Lab_results_Lab_results1">
+          <End Role="Lab_results" Type="Self.Lab_results" Multiplicity="1" />
+          <End Role="Medical_Test_has_Lab_results" Type="Self.Medical_Test_has_Lab_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lab_results">
+              <PropertyRef Name="results_id" />
+            </Principal>
+            <Dependent Role="Medical_Test_has_Lab_results">
+              <PropertyRef Name="results_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_has_Lab_results_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Medical_Test_has_Lab_results" Type="Self.Medical_Test_has_Lab_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Medical_Test_has_Lab_results">
+              <PropertyRef Name="Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Medical_Test_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="Medical_Test">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Medical_Test_Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Survey_Medical_Test1">
+          <End Role="Medical_Test" Type="Self.Medical_Test" Multiplicity="1" />
+          <End Role="Survey" Type="Self.Survey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Test">
+              <PropertyRef Name="Medical_Test_id" />
+            </Principal>
+            <Dependent Role="Survey">
+              <PropertyRef Name="Medical_Test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Staff_has_Patient_Patient1">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Staff_has_Patient" Type="Self.Staff_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_id" />
+            </Principal>
+            <Dependent Role="Staff_has_Patient">
+              <PropertyRef Name="Patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_Question_Category1">
+          <End Role="Question_Category" Type="Self.Question_Category" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question_Category">
+              <PropertyRef Name="Question_Category_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Question_Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_has_Survey_Questions1">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="Survey_has_Questions" Type="Self.Survey_has_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="questions_id" />
+            </Principal>
+            <Dependent Role="Survey_has_Questions">
+              <PropertyRef Name="questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Staff_has_Patient_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff_has_Patient" Type="Self.Staff_has_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="Staff_has_Patient">
+              <PropertyRef Name="Staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Questions_has_Survey_Survey1">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Survey_has_Questions" Type="Self.Survey_has_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="survey_id" />
+            </Principal>
+            <Dependent Role="Survey_has_Questions">
+              <PropertyRef Name="Survey_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYPTLYEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
+          <EntitySet Name="Bundles" EntityType="Self.Bundle" />
+          <EntitySet Name="Corporates" EntityType="Self.Corporate" />
+          <EntitySet Name="Corporate_has_Patient" EntityType="Self.Corporate_has_Patient" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="HR_Contact_List" EntityType="Self.HR_Contact_List" />
+          <EntitySet Name="Lab_results" EntityType="Self.Lab_results" />
+          <EntitySet Name="Medical_Test" EntityType="Self.Medical_Test" />
+          <EntitySet Name="Medical_Test_has_Lab_results" EntityType="Self.Medical_Test_has_Lab_results" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Question_Category" EntityType="Self.Question_Category" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Staff_has_Patient" EntityType="Self.Staff_has_Patient" />
+          <EntitySet Name="Surveys" EntityType="Self.Survey" />
+          <EntitySet Name="Survey_has_Questions" EntityType="Self.Survey_has_Questions" />
+          <EntitySet Name="Venues" EntityType="Self.Venue" />
+          <AssociationSet Name="fk_Appointment_Patient1" Association="Self.fk_Appointment_Patient1">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Appointment_Venue1" Association="Self.fk_Appointment_Venue1">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_Appointment1" Association="Self.fk_Medical_Test_Appointment1">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Bundle_Corporate1" Association="Self.fk_Bundle_Corporate1">
+            <End Role="Corporate" EntitySet="Corporates" />
+            <End Role="Bundle" EntitySet="Bundles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Corporate_has_Patient_Corporate1" Association="Self.fk_Corporate_has_Patient_Corporate1">
+            <End Role="Corporate" EntitySet="Corporates" />
+            <End Role="Corporate_has_Patient" EntitySet="Corporate_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Event_Corporate1" Association="Self.fk_Event_Corporate1">
+            <End Role="Corporate" EntitySet="Corporates" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="fk_HR_Contact_List_Corporate1" Association="Self.fk_HR_Contact_List_Corporate1">
+            <End Role="Corporate" EntitySet="Corporates" />
+            <End Role="HR_Contact_List" EntitySet="HR_Contact_List" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Corporate_has_Patient_Patient1" Association="Self.fk_Corporate_has_Patient_Patient1">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Corporate_has_Patient" EntitySet="Corporate_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_has_Lab_results_Lab_results1" Association="Self.fk_Medical_Test_has_Lab_results_Lab_results1">
+            <End Role="Lab_results" EntitySet="Lab_results" />
+            <End Role="Medical_Test_has_Lab_results" EntitySet="Medical_Test_has_Lab_results" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_has_Lab_results_Medical_Test1" Association="Self.fk_Medical_Test_has_Lab_results_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Medical_Test_has_Lab_results" EntitySet="Medical_Test_has_Lab_results" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Medical_Test_Staff1" Association="Self.fk_Medical_Test_Staff1">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_Medical_Test1" Association="Self.fk_Questions_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Survey_Medical_Test1" Association="Self.fk_Survey_Medical_Test1">
+            <End Role="Medical_Test" EntitySet="Medical_Test" />
+            <End Role="Survey" EntitySet="Surveys" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Staff_has_Patient_Patient1" Association="Self.fk_Staff_has_Patient_Patient1">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Staff_has_Patient" EntitySet="Staff_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_Question_Category1" Association="Self.fk_Questions_Question_Category1">
+            <End Role="Question_Category" EntitySet="Question_Category" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_has_Survey_Questions1" Association="Self.fk_Questions_has_Survey_Questions1">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Survey_has_Questions" EntitySet="Survey_has_Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Staff_has_Patient_Staff1" Association="Self.fk_Staff_has_Patient_Staff1">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Staff_has_Patient" EntitySet="Staff_has_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Questions_has_Survey_Survey1" Association="Self.fk_Questions_has_Survey_Survey1">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="Survey_has_Questions" EntitySet="Survey_has_Questions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FYPTLYModelStoreContainer" CdmEntityContainer="FYPTLYEntities">
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="FYPTLYModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="appointment_id" ColumnName="appointment_id" />
+                <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
+                <ScalarProperty Name="Appointment_time" ColumnName="Appointment_time" />
+                <ScalarProperty Name="appointment_type" ColumnName="appointment_type" />
+                <ScalarProperty Name="Venue_id" ColumnName="Venue_id" />
+                <ScalarProperty Name="Patient_id" ColumnName="Patient_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="FYPTLYModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="Appuser_Id" ColumnName="Appuser_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="NRIC" ColumnName="NRIC" />
+                <ScalarProperty Name="Mobile_Number" ColumnName="Mobile_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Last_Login" ColumnName="Last_Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bundles">
+            <EntityTypeMapping TypeName="FYPTLYModel.Bundle">
+              <MappingFragment StoreEntitySet="Bundle">
+                <ScalarProperty Name="bundle_id" ColumnName="bundle_id" />
+                <ScalarProperty Name="bundle_name" ColumnName="bundle_name" />
+                <ScalarProperty Name="corporate_id" ColumnName="corporate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corporates">
+            <EntityTypeMapping TypeName="FYPTLYModel.Corporate">
+              <MappingFragment StoreEntitySet="Corporate">
+                <ScalarProperty Name="corporate_id" ColumnName="corporate_id" />
+                <ScalarProperty Name="corporate_name" ColumnName="corporate_name" />
+                <ScalarProperty Name="corporate_details" ColumnName="corporate_details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corporate_has_Patient">
+            <EntityTypeMapping TypeName="FYPTLYModel.Corporate_has_Patient">
+              <MappingFragment StoreEntitySet="Corporate_has_Patient">
+                <ScalarProperty Name="corporate_id" ColumnName="corporate_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="FYPTLYModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="event_name" ColumnName="event_name" />
+                <ScalarProperty Name="corporate_id" ColumnName="corporate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Contact_List">
+            <EntityTypeMapping TypeName="FYPTLYModel.HR_Contact_List">
+              <MappingFragment StoreEntitySet="HR_Contact_List">
+                <ScalarProperty Name="hr_id" ColumnName="hr_id" />
+                <ScalarProperty Name="hr_name" ColumnName="hr_name" />
+                <ScalarProperty Name="hr_contact" ColumnName="hr_contact" />
+                <ScalarProperty Name="hr_email" ColumnName="hr_email" />
+                <ScalarProperty Name="corporate_id" ColumnName="corporate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lab_results">
+            <EntityTypeMapping TypeName="FYPTLYModel.Lab_results">
+              <MappingFragment StoreEntitySet="Lab_results">
+                <ScalarProperty Name="results_id" ColumnName="results_id" />
+                <ScalarProperty Name="results_observation" ColumnName="results_observation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medical_Test">
+            <EntityTypeMapping TypeName="FYPTLYModel.Medical_Test">
+              <MappingFragment StoreEntitySet="Medical_Test">
+                <ScalarProperty Name="Medical_Test_id" ColumnName="Medical_Test_id" />
+                <ScalarProperty Name="test_name" ColumnName="test_name" />
+                <ScalarProperty Name="test_description" ColumnName="test_description" />
+                <ScalarProperty Name="Staff_id" ColumnName="Staff_id" />
+                <ScalarProperty Name="appointment_id" ColumnName="appointment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medical_Test_has_Lab_results">
+            <EntityTypeMapping TypeName="FYPTLYModel.Medical_Test_has_Lab_results">
+              <MappingFragment StoreEntitySet="Medical_Test_has_Lab_results">
+                <ScalarProperty Name="Medical_Test_id" ColumnName="Medical_Test_id" />
+                <ScalarProperty Name="results_id" ColumnName="results_id" />
+                <ScalarProperty Name="result_description" ColumnName="result_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="FYPTLYModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Patient_id" ColumnName="Patient_id" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_address" ColumnName="p_address" />
+                <ScalarProperty Name="p_gender" ColumnName="p_gender" />
+                <ScalarProperty Name="p_dob" ColumnName="p_dob" />
+                <ScalarProperty Name="p_email" ColumnName="p_email" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question_Category">
+            <EntityTypeMapping TypeName="FYPTLYModel.Question_Category">
+              <MappingFragment StoreEntitySet="Question_Category">
+                <ScalarProperty Name="Question_Category_id" ColumnName="Question_Category_id" />
+                <ScalarProperty Name="question_category_name" ColumnName="question_category_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="FYPTLYModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="questions_id" ColumnName="questions_id" />
+                <ScalarProperty Name="question_text" ColumnName="question_text" />
+                <ScalarProperty Name="mcq" ColumnName="mcq" />
+                <ScalarProperty Name="question_option" ColumnName="question_option" />
+                <ScalarProperty Name="Question_Category_id" ColumnName="Question_Category_id" />
+                <ScalarProperty Name="Medical_Test_Medical_Test_id" ColumnName="Medical_Test_Medical_Test_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="FYPTLYModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="staff_name" ColumnName="staff_name" />
+                <ScalarProperty Name="staff_department" ColumnName="staff_department" />
+                <ScalarProperty Name="staff_roles" ColumnName="staff_roles" />
+                <ScalarProperty Name="staff_email" ColumnName="staff_email" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="staff_user" ColumnName="staff_user" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="staff_pass" ColumnName="staff_pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff_has_Patient">
+            <EntityTypeMapping TypeName="FYPTLYModel.Staff_has_Patient">
+              <MappingFragment StoreEntitySet="Staff_has_Patient">
+                <ScalarProperty Name="Staff_id" ColumnName="Staff_id" />
+                <ScalarProperty Name="Patient_id" ColumnName="Patient_id" />
+                <ScalarProperty Name="First_consultation_date" ColumnName="First_consultation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surveys">
+            <EntityTypeMapping TypeName="FYPTLYModel.Survey">
+              <MappingFragment StoreEntitySet="Survey">
+                <ScalarProperty Name="survey_id" ColumnName="survey_id" />
+                <ScalarProperty Name="survey_name" ColumnName="survey_name" />
+                <ScalarProperty Name="date_conducted" ColumnName="date_conducted" />
+                <ScalarProperty Name="Medical_Test_id" ColumnName="Medical_Test_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Survey_has_Questions">
+            <EntityTypeMapping TypeName="FYPTLYModel.Survey_has_Questions">
+              <MappingFragment StoreEntitySet="Survey_has_Questions">
+                <ScalarProperty Name="questions_id" ColumnName="questions_id" />
+                <ScalarProperty Name="Survey_id" ColumnName="Survey_id" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venues">
+            <EntityTypeMapping TypeName="FYPTLYModel.Venue">
+              <MappingFragment StoreEntitySet="Venue">
+                <ScalarProperty Name="Venue_id" ColumnName="Venue_id" />
+                <ScalarProperty Name="Venue_name" ColumnName="Venue_name" />
+                <ScalarProperty Name="Venue_address" ColumnName="Venue_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

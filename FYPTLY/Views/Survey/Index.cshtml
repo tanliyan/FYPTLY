@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FYPTLY.Models.Survey>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Survey</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.survey_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_conducted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medical_Test.test_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.survey_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_conducted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medical_Test.test_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.survey_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.survey_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.survey_id })
+        </td>
+    </tr>
+}
+
+</table>

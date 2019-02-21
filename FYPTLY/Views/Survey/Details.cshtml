@@ -1,0 +1,42 @@
+﻿@model FYPTLY.Models.Survey
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Survey</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.survey_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.survey_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_conducted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_conducted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medical_Test.test_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medical_Test.test_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.survey_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

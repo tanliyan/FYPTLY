@@ -1,0 +1,88 @@
+﻿@model IEnumerable<FYPTLY.Models.Patient>
+
+@{
+    ViewBag.Title = "View Registered Patients";
+}
+
+<h2>View Registered Patients</h2>
+
+<p>
+    @Html.ActionLink("Register as Patient", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Patient", FormMethod.Post))
+{
+
+    <div>
+        Search by NRIC or Gender @Html.TextBox("searchString")
+        <input id="Submit1" type="submit" value="Filter" />
+    </div>
+
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Nric)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_dob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postal_code)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nric)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p_gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p_dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.p_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postal_code)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Patient_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Patient_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Patient_id })
+            </td>
+        </tr>
+    }
+
+</table>

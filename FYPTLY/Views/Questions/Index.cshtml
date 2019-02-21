@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FYPTLY.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Questions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.question_text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mcq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.question_option)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medical_Test.test_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Question_Category.question_category_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.question_text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mcq)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.question_option)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medical_Test.test_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Question_Category.question_category_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.questions_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.questions_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.questions_id })
+        </td>
+    </tr>
+}
+
+</table>
